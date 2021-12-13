@@ -25,16 +25,16 @@ import del from 'rollup-plugin-delete' // 删除文件和文件夹
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command }) => { // https://cn.vitejs.dev/config/#conditional-config
-  const moduleName = process.env.MODULE_NAME
+  const projectName = process.env.PROJECT_NAME
   console.log(command);
   return {
     base: './',
     plugins: [
       vue(),
       injectHtml({
-        data: { moduleName },
+        data: { projectName },
       }),
-      (command === 'build' && del({ targets: `dist/${moduleName}` })),
+      (command === 'build' && del({ targets: `dist/${projectName}` })),
     ],
     build: {
       emptyOutDir: false,
@@ -45,7 +45,7 @@ export default defineConfig(({ command }) => { // https://cn.vitejs.dev/config/#
           index: 'index.html', // 可以分为多个 .html
         },
         output: {
-          dir: `dist/${moduleName}`,
+          dir: `dist/${projectName}`,
         },
       },
     },
@@ -62,13 +62,13 @@ export default defineConfig(({ command }) => { // https://cn.vitejs.dev/config/#
   <head>
     <meta charset="UTF-8" />
     <!-- <link rel="icon" href="/favicon.ico" /> -->
-    <link rel="icon" href="/src/pages/<%= moduleName %>/assets/favicon.ico" />
+    <link rel="icon" href="/src/pages/<%= projectName %>/assets/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App <%= moduleName %></title>
+    <title>Vite App <%= projectName %></title>
   </head>
   <body>
     <div id="app"></div>
-    <script type="module" src="/src/pages/<%= moduleName %>/main.js"></script>
+    <script type="module" src="/src/pages/<%= projectName %>/main.js"></script>
   </body>
 </html>
 
@@ -78,10 +78,10 @@ export default defineConfig(({ command }) => { // https://cn.vitejs.dev/config/#
 
 ```
 "scripts": {
-    "dev:projectA": "cross-env MODULE_NAME=projectA vite",
-    "dev:projectB": "cross-env MODULE_NAME=projectB vite",
-    "build:projectA": "cross-env MODULE_NAME=projectA vite build",
-    "build:projectB": "cross-env MODULE_NAME=projectB vite build",
+    "dev:projectA": "cross-env PROJECT_NAME=projectA vite",
+    "dev:projectB": "cross-env PROJECT_NAME=projectB vite",
+    "build:projectA": "cross-env PROJECT_NAME=projectA vite build",
+    "build:projectB": "cross-env PROJECT_NAME=projectB vite build",
     "serve": "vite preview"
   },
 ```
@@ -107,5 +107,5 @@ yarn build:projectB
 
 ## 总结
 
-利用 `cross-env` 输出环境变量到 `vite.config`，根据 `MODULE_NAME` 得到 main.js，就能打包对应的项目。
+利用 `cross-env` 输出环境变量到 `vite.config`，根据 `PROJECT_NAME` 得到 main.js，就能打包对应的项目。
 

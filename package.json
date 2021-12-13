@@ -2,10 +2,10 @@
   "name": "vite",
   "version": "0.0.0",
   "scripts": {
-    "dev:projectA": "cross-env MODULE_NAME=projectA vite",
-    "dev:projectB": "cross-env MODULE_NAME=projectB vite",
-    "build:projectA": "cross-env MODULE_NAME=projectA vite build",
-    "build:projectB": "cross-env MODULE_NAME=projectB vite build",
+    "dev:projectA": "cross-env PROJECT_NAME=projectA vite",
+    "dev:projectB": "cross-env PROJECT_NAME=projectB vite",
+    "build:projectA": "cross-env PROJECT_NAME=projectA vite build",
+    "build:projectB": "cross-env PROJECT_NAME=projectB vite build",
     "serve": "vite preview"
   },
   "dependencies": {
