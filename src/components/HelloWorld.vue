@@ -1,6 +1,8 @@
 <script setup>
 import { ref } from 'vue'
 
+console.log(import.meta.env)
+
 defineProps({
   msg: String
 })

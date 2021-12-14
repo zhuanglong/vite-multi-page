@@ -2,19 +2,23 @@
   "name": "vite",
   "version": "0.0.0",
   "scripts": {
-    "dev:projectA": "cross-env PROJECT_NAME=projectA vite",
-    "dev:projectB": "cross-env PROJECT_NAME=projectB vite",
-    "build:projectA": "cross-env PROJECT_NAME=projectA vite build",
-    "build:projectB": "cross-env PROJECT_NAME=projectB vite build",
-    "serve": "vite preview"
+    "preview": "vite preview",
+    "serve:dev": "node ./scripts/build.js run serve --mode dev",
+    "build:dev": "node ./scripts/build.js run build --mode dev",
+    "serve:prod": "node ./scripts/build.js run serve --mode prod",
+    "build:prod": "node ./scripts/build.js run build --mode prod"
   },
   "dependencies": {
     "vue": "^3.2.16"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.9.3",
+    "chalk": "^4.1.2",
+    "commander": "^8.3.0",
     "cross-env": "^7.0.3",
+    "inquirer": "^8.2.0",
     "rollup-plugin-delete": "^2.0.0",
+    "shelljs": "^0.8.4",
     "vite": "^2.6.4",
     "vite-plugin-html": "^2.1.1"
   },
