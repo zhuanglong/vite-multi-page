@@ -8,7 +8,7 @@ function handleShell(params) {
   const { projectName, runType, mode } = params
   // console.log({ projectName, runType, mode })
 
-  // 设置 node 环境变量
+  // 设置编译时环境变量
   process.env.PROJECT_NAME = projectName
 
   // 区分构建方式
@@ -30,6 +30,18 @@ function handleShell(params) {
 // 生成交互选项
 function openInquirer(runType, options) {
   const projectNames = ['projectA', 'projectB']
+
+  // 是手动输入并且存在，则直接执行，不需要列表选择
+  if (projectNames.includes(options.project)) {
+    handleShell({
+      projectName: options.project,
+      runType,
+      mode: options.mode,
+    })
+    return
+  } else {
+    console.log(chalk.red('！指定模块不存在，请手动选择'));
+  }
 
   const questions = {
     type: 'list',
@@ -57,7 +69,9 @@ function openInquirer(runType, options) {
 }
 
 // 执行命令行
+// <> 必选，[]可选
 program
+  // .version('1.0.0', '-v, --version')
   .command('run <runType>')
   .option('--mode <envName>', '[string] .env 环境变量') // https://cn.vitejs.dev/guide/env-and-mode.html#env-variables-and-modes
   .option('--project <projectName>', '[string] 项目名')

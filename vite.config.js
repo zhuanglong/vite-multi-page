@@ -5,7 +5,7 @@ import del from 'rollup-plugin-delete' // 删除文件和文件夹
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => { // https://cn.vitejs.dev/config/#conditional-config
-  const projectName = process.env.PROJECT_NAME
+  const projectName = process.env.PROJECT_NAME // 编译时环境变量
   const env = loadEnv(mode, './'); // 加载 .env 环境变量
 
   return {
