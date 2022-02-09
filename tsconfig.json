@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "useDefineForClassFields": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": true, // https://v3.cn.vuejs.org/guide/typescript-support.html#%E6%8E%A8%E8%8D%90%E9%85%8D%E7%BD%AE
+    "jsx": "preserve",
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "lib": ["esnext", "dom"],
+    "rootDir": ".",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+    },
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "types/**/*.ts",
+    "types/**/*.d.ts",
+    "scripts/**/*.ts",
+    "scripts/**/*.d.ts",
+    "vite.config.ts",
+  ],
+  "exclude": ["node_modules", "dist", "**/*.js"]
+}
