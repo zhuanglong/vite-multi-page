@@ -1,7 +1,7 @@
 import type { AxiosRequestConfig, AxiosInstance, AxiosResponse, AxiosError } from 'axios';
 import axios from 'axios';
 
-import type { CreateAxiosOptions, RequestOptions, ResultModel } from './types';
+import type { CreateAxiosOptions, RequestOptions, ResultModel } from './typing';
 import * as requestCanceler from './requestCanceler';
 import { matchHttpStatusCode } from './handleStatus';
 
