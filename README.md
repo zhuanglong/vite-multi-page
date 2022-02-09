@@ -1,5 +1,7 @@
 # Vite + Vue 多页面配置
 
+[可用于生产版本](https://github.com/zhuanglong/vite-multi-page/tree/producible)
+
 ## 实现过程
 
 ### 安装依赖
