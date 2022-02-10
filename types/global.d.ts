@@ -1,8 +1,4 @@
-// .env.xx 全局环境变量
-interface ViteEnv {
-  VITE_APP_ENV: 'dev' | 'prod' | 'staging';
-  VITE_PAGE_BASE_TITLE: string;
-}
+// ============= 用于打包多页面的类型 start =============
 
 // 自定义的 Node 全局环境变量
 type NodeEnv = Pick<InquirerAnswers, 'projectName' | 'report'>;
@@ -37,6 +33,21 @@ type AppsInfo = {
 
 declare const __APP_INFO__: AppItemInfo;
 
+// ============= 用于打包多页面的类型 end =============
+
+// .env.xx 全局环境变量
+interface ViteEnv {
+  VITE_APP_ENV: 'dev' | 'prod' | 'staging';
+  VITE_PAGE_BASE_TITLE: string;
+}
+
+// 扩充 ImportMetaEnv 类型
+// https://cn.vitejs.dev/guide/env-and-mode.html#intellisense
+interface ImportMetaEnv extends ViteEnv {
+  __: unknown;
+}
+
+// 扩充 Window 类型
 interface Window {
   $px2rem(value: number): string;
 }
