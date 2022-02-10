@@ -21,7 +21,7 @@ export default defineConfig(({ command }) => { // https://cn.vitejs.dev/config/#
       // https://rollupjs.org/guide/en/#outputoptions-object
       rollupOptions: {
         input: {
-          index: 'index.html', // 可以分为多个 .html
+          index: 'index.html', // https://cn.vitejs.dev/guide/build.html#multi-page-app
         },
         output: {
           dir: `dist/${projectName}`,
