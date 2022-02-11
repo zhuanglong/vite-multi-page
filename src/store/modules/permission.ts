@@ -7,6 +7,7 @@ import { sleep } from '@/utils';
 type Roles = Array<string>;
 
 interface PermissionState {
+  startPath: string; // 打开应用时的 path
   isLoggedIn: boolean;
   roles: Roles;
 }
@@ -15,11 +16,15 @@ export const usePermission = defineStore({
   id: 'permission',
 
   state: (): PermissionState => ({
+    startPath: '',
     isLoggedIn: false,
     roles: [],
   }),
 
   actions: {
+    setStartPath(path: string) {
+      this.startPath = path;
+    },
     setLoading(payload: boolean) {
       this.isLoggedIn = payload;
     },

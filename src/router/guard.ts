@@ -62,28 +62,34 @@ function createProgressGuard(router: Router) {
 // 路由拦截
 function createPermissionGuard(router: Router) {
   router.beforeEach((to, from, next) => {
+    const { setStartPath, isLoggedIn, roles } = usePermission();
+
+    // 打开应用时的 path，登录后需要跳转到该 path
+    // 如 http://localhost:3000/#/view-xx，校验权限会重定向到 /login，登录成功需要重定向到 /view-xx
+    if (to.path === '/login') {
+      setStartPath(to.redirectedFrom?.fullPath || '');
+    }
+
     // 忽略权限检查
     if (to.meta.ignoreAuth) {
       next();
-      return;
+      return true;
     }
 
     // 需要检查权限
-    const { isLoggedIn, roles } = usePermission();
-    // 切换路由时，如果正在获取权限，则重定向到登录页
     if (!isLoggedIn) {
       next('/login');
-      return;
+      return true;
     }
     const hasPermission = roles.some((item: string) =>
       ((to.meta.roles || []) as Array<string>).includes(item),
     );
     if (hasPermission) {
       next();
-      return;
+      return true;
     } else {
       next('/401');
-      return;
+      return true;
     }
   });
 }

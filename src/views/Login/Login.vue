@@ -2,22 +2,18 @@
   <div></div>
 </template>
 
-<script lang="ts">
-  import { defineComponent, onMounted } from 'vue';
+<script lang="ts" setup>
+  import { onMounted } from 'vue';
   import { useRouter } from 'vue-router';
   import { usePermission } from '@/store/modules/permission';
 
-  export default defineComponent({
-    name: 'Login',
-    setup() {
-      onMounted(() => {
-        // 静默登录
-        const router = useRouter();
-        const permission = usePermission();
-        permission.fetchRoles().then(() => {
-          router.replace('/');
-        });
-      });
-    },
+  const router = useRouter();
+
+  onMounted(() => {
+    // 静默登录，拿到 code 请求登录接口
+    const { fetchRoles, startPath } = usePermission();
+    fetchRoles().then(() => {
+      router.replace(startPath || '/');
+    });
   });
 </script>
