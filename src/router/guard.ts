@@ -10,7 +10,7 @@ const { title: pageBaseTitle } = getAppInfo();
 
 export function setupRouterGuard(router: Router) {
   changePageTitle(router);
-  createHttpGrard(router);
+  createHttpGurad(router);
   createProgressGuard(router);
   createPermissionGuard(router);
 }
@@ -35,7 +35,7 @@ function changePageTitle(router: Router) {
 }
 
 // 切换路由将删除之前的请求
-function createHttpGrard(router: Router) {
+function createHttpGurad(router: Router) {
   router.beforeEach(() => {
     requestCanceler.removeAllPending();
     return true;
