@@ -5,6 +5,8 @@ import vue from '@vitejs/plugin-vue';
 import { injectHtml } from 'vite-plugin-html'; // 插入数据到 index.html
 import { visualizer } from 'rollup-plugin-visualizer'; // 打包模块可视化分析
 import del from 'rollup-plugin-delete'; // 删除文件和文件夹
+import compressPlugin from 'vite-plugin-compression'; // 使用 gzip 压缩资源
+// import esbuild from 'rollup-plugin-esbuild';
 // import legacy from '@vitejs/plugin-legacy'; // 向下兼容插件
 
 import { getAppInfo } from './scripts/appInfo';
@@ -37,13 +39,27 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
           gzipSize: true,
           brotliSize: true,
         }),
+      report !== 'true' &&
+        compressPlugin({
+          ext: '.gz',
+          filter: /\.(js|css)$/i,
+          threshold: 10240,
+          deleteOriginFile: true,
+        }),
+      // 解决 dev 模式无法在 Chrome 70 下使用 optional chaining 语法，https://github.com/vitejs/vite/issues/5222
+      // 目前钉钉 webview 的内核是 Chrome/69.x.x，如需在钉钉上调试，请启用 esbuild
+      // {
+      //   ...esbuild({
+      //     target: 'chrome70',
+      //     include: /\.(vue|ts|tsx)$/,
+      //     loaders: {
+      //       '.vue': 'js',
+      //     },
+      //   }),
+      //   enforce: 'post',
+      // },
       // legacy()
     ],
-    // 解决 dev 模式无法在 Chrome 70 下使用 optional chaining 语法，https://github.com/vitejs/vite/issues/5222
-    // 目前钉钉 webview 的内核是 Chrome/69.x.x，如需在钉钉上调试，请启用 esbuild
-    // esbuild: {
-    //   target: 'chrome70',
-    // },
     resolve: {
       alias: {
         '@': resolve(process.cwd(), 'src'),

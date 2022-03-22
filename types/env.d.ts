@@ -1,3 +1,4 @@
+// https://cn.vitejs.dev/guide/features.html#client-types
 /// <reference types="vite/client" />
 
 declare module '*.vue' {

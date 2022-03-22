@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "serve:dev": "esno ./scripts/build.ts run serve --mode=development",
+    "dev": "esno ./scripts/build.ts run serve --mode=development",
     "build:prod": "esno ./scripts/build.ts run build --mode=production",
     "build:staging": "esno ./scripts/build.ts run build --mode=staging",
     "report": "npm run build:staging -- --report=true",
@@ -46,6 +46,7 @@
     "postcss-scss": "^4.0.3",
     "prettier": "^2.4.1",
     "rollup-plugin-delete": "^2.0.0",
+    "rollup-plugin-esbuild": "^4.8.2",
     "rollup-plugin-visualizer": "^5.5.2",
     "sass": "^1.42.1",
     "shelljs": "^0.8.5",
@@ -55,6 +56,7 @@
     "stylelint-config-standard": "^24.0.0",
     "typescript": "^4.4.3",
     "vite": "^2.6.4",
+    "vite-plugin-compression": "^0.5.1",
     "vite-plugin-html": "^2.1.1",
     "vue-eslint-parser": "^7.11.0",
     "vue-tsc": "^0.3.0"
