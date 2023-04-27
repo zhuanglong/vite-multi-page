@@ -1,8 +1,8 @@
 import type { UserConfig, ConfigEnv } from 'vite';
 import { resolve } from 'path';
-import { defineConfig, loadEnv } from 'vite';
+import { defineConfig, loadEnv, splitVendorChunkPlugin } from 'vite';
 import vue from '@vitejs/plugin-vue';
-import { injectHtml } from 'vite-plugin-html'; // 插入数据到 index.html
+import { createHtmlPlugin } from 'vite-plugin-html'; // 插入数据到 index.html
 import { visualizer } from 'rollup-plugin-visualizer'; // 打包模块可视化分析
 import del from 'rollup-plugin-delete'; // 删除文件和文件夹
 import compressPlugin from 'vite-plugin-compression'; // 使用 gzip 压缩资源
@@ -25,10 +25,13 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
     base: './',
     plugins: [
       vue(),
-      injectHtml({
-        data: {
-          projectName,
-          title: appInfo.title,
+      splitVendorChunkPlugin(),
+      createHtmlPlugin({
+        inject: {
+          data: {
+            projectName,
+            title: appInfo.title,
+          },
         },
       }),
       command === 'build' && del({ targets: `dist/${projectName}-${env.VITE_APP_ENV}` }),
