@@ -1,22 +1,72 @@
 {
-  "name": "vite",
+  "name": "vite-project",
   "version": "0.0.0",
+  "license": "MIT",
   "scripts": {
-    "dev:projectA": "cross-env PROJECT_NAME=projectA vite",
-    "dev:projectB": "cross-env PROJECT_NAME=projectB vite",
-    "build:projectA": "cross-env PROJECT_NAME=projectA vite build",
-    "build:projectB": "cross-env PROJECT_NAME=projectB vite build",
-    "serve": "vite preview"
+    "dev": "esno ./scripts/build.ts run serve --mode=development",
+    "build:prod": "esno ./scripts/build.ts run build --mode=production",
+    "build:staging": "esno ./scripts/build.ts run build --mode=staging",
+    "report": "npm run build:staging -- --report=true",
+    "lint": "npm run lint:js && npm run lint:style",
+    "lint:js": "eslint --ext .vue,.ts,.tsx .",
+    "lint:js--fix": "npm run lint:js -- --fix",
+    "lint:style": "stylelint \"src/**/*.{vue,css,less,scss,postcss}\"",
+    "lint:style--fix": "npm run lint:style -- --fix",
+    "type:check": "vue-tsc --noEmit --skipLibCheck",
+    "precommit": "lint-staged",
+    "prepare": "husky install"
   },
   "dependencies": {
-    "vue": "^3.2.16"
+    "axios": "^0.23.0",
+    "nprogress": "^0.2.0",
+    "pinia": "^2.0.11",
+    "vue": "^3.2.16",
+    "vue-router": "^4.0.11"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^1.9.3",
-    "cross-env": "^7.0.3",
+    "@types/node": "^16.10.3",
+    "@types/nprogress": "^0.2.0",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "@vitejs/plugin-legacy": "^4.0.3",
+    "@vitejs/plugin-vue": "^4.2.1",
+    "@vitejs/plugin-vue-jsx": "^3.0.1",
+    "chalk": "^4.1.2",
+    "commander": "^8.3.0",
+    "eslint": "^8.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-define-config": "^1.1.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-vue": "^7.19.1",
+    "esno": "^0.14.0",
+    "husky": "^7.0.0",
+    "inquirer": "^8.2.0",
+    "lint-staged": "^11.2.3",
+    "postcss": "^8.4.5",
+    "postcss-html": "^1.3.0",
+    "postcss-scss": "^4.0.3",
+    "prettier": "^2.4.1",
     "rollup-plugin-delete": "^2.0.0",
-    "vite": "^2.6.4",
-    "vite-plugin-html": "^2.1.1"
+    "rollup-plugin-esbuild": "^5.0.0",
+    "rollup-plugin-visualizer": "^5.9.0",
+    "sass": "^1.62.1",
+    "shelljs": "^0.8.5",
+    "stylelint": "^14.2.0",
+    "stylelint-config-idiomatic-order": "^8.1.0",
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-config-standard": "^24.0.0",
+    "typescript": "^4.4.3",
+    "vite": "^4.3.2",
+    "vite-plugin-compression": "^0.5.1",
+    "vite-plugin-html": "^3.2.0",
+    "vue-eslint-parser": "^7.11.0",
+    "vue-tsc": "^0.3.0"
   },
-  "license": "MIT"
+  "engines": {
+    "node": ">=16.15.1"
+  },
+  "lint-staged": {
+    "*.{vue,ts,tsx}": "eslint",
+    "*.{vue,css,less,scss,postcss}": "stylelint"
+  }
 }
