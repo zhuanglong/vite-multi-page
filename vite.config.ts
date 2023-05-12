@@ -6,6 +6,7 @@ import { createHtmlPlugin } from 'vite-plugin-html'; // 插入数据到 index.ht
 import { visualizer } from 'rollup-plugin-visualizer'; // 打包模块可视化分析
 import del from 'rollup-plugin-delete'; // 删除文件和文件夹
 import compressPlugin from 'vite-plugin-compression'; // 使用 gzip 压缩资源
+import vueJsx from '@vitejs/plugin-vue-jsx';
 // import esbuild from 'rollup-plugin-esbuild';
 // import legacy from '@vitejs/plugin-legacy'; // 向下兼容插件
 
@@ -17,19 +18,22 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
   // 编译时环境变量
   const { projectName, report } = process.env as unknown as NodeEnv;
   // 加载 .env 环境变量
-  const env = loadEnv(mode, './') as unknown as ViteEnv;
+  const env = loadEnv(mode, './') as unknown as ImportMetaEnv;
   // 对应项目的配置
   const appInfo = getAppInfo(env.VITE_APP_ENV, projectName);
+  // 对应的项目路径
+  const projectPath = `src/projects/${projectName}`;
 
   return {
     base: './',
     plugins: [
       vue(),
+      vueJsx(),
       splitVendorChunkPlugin(),
       createHtmlPlugin({
         inject: {
           data: {
-            projectName,
+            projectPath,
             title: appInfo.title,
           },
         },
@@ -76,6 +80,21 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
           additionalData: "@import '@/design/flexible/flexible.scss';",
         },
       },
+      postcss: {
+        plugins: [
+          // 解决打包警告 `"@charset" must be the first rule in the file`
+          {
+            postcssPlugin: 'internal:charset-removal',
+            AtRule: {
+              charset: (atRule) => {
+                if (atRule.name === 'charset') {
+                  atRule.remove();
+                }
+              },
+            },
+          },
+        ],
+      },
     },
     define: {
       __APP_INFO__: JSON.stringify(appInfo),
@@ -101,12 +120,9 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
           dir: `dist/${projectName}-${env.VITE_APP_ENV}`,
         },
       },
-      // terserOptions: {
-      //   compress: {
-      //     drop_console: true,
-      //     drop_debugger: true,
-      //   },
-      // },
+      // 防止 vite 将 rgba() 颜色转化为 #RGBA 十六进制符号的形式
+      // https://cn.vitejs.dev/config/#build-csstarget
+      cssTarget: 'chrome61',
     },
   };
 });

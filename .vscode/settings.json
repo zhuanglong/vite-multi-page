@@ -1,13 +1,13 @@
 {
   "editor.tabSize": 2,
-  "prettier.requireConfig": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "path-autocomplete.extensionOnImport": true,
-  "stylelint.validate": ["css", "scss", "vue"],
   "alias-skip.mappings": {
     "@": "/src"
   },
-  "path-autocomplete.pathMappings": {
-    "@": "${folder}/src"
-  }
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+  ],
+  "stylelint.validate": ["css", "scss", "vue"], // 会导致代码智能提示很慢
 }

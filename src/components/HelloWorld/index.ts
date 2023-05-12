@@ -1,1 +1,1 @@
-export { default } from './src/HelloWorld.vue';
+export { default } from './HelloWorld.vue';

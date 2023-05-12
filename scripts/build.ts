@@ -35,11 +35,27 @@ function openInquirer(runType: RunType, options: InquirerAnswers) {
 
   // 手动输入且存在则直接执行，不需要列表选择
   if (projectName) {
-    if (projectList.includes(projectName)) {
-      handleShell(runType, { projectName, mode, report });
+    const errorNames: string[] = [];
+    const nameList = projectName.split(',') as ProjectList;
+
+    nameList.forEach((name) => {
+      if (!projectList.includes(name)) {
+        errorNames.push(name);
+      }
+    });
+
+    if (runType === 'serve' && nameList.length > 1) {
+      console.log(chalk.red(`！开发模式只能指定一个模块`));
       return;
+    }
+
+    if (errorNames.length > 0) {
+      console.log(chalk.red(`！指定模块'${errorNames.join(',')}'不存在，请手动选择`));
     } else {
-      console.log(chalk.red('！指定模块不存在，请手动选择'));
+      nameList.forEach((name) => {
+        handleShell(runType, { projectName: name, mode, report });
+      });
+      return;
     }
   }
 

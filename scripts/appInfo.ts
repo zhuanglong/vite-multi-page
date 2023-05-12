@@ -1,5 +1,3 @@
-type ViteAppEnv = ViteEnv['VITE_APP_ENV'];
-
 // dev 本地开发
 function getDevAppInfo(projectName: ProjectNames): AppItemInfo {
   const serverURL = 'https://dev.myserver.com'; // web 服务器地址
@@ -84,7 +82,10 @@ function getProdAppInfo(projectName: ProjectNames): AppItemInfo {
   return obj[projectName];
 }
 
-export function getAppInfo(appEnv: ViteAppEnv, projectName: ProjectNames): AppItemInfo {
+export function getAppInfo(
+  appEnv: ImportMetaEnv['VITE_APP_ENV'],
+  projectName: ProjectNames,
+): AppItemInfo {
   if (appEnv === 'prod') {
     return getProdAppInfo(projectName);
   }

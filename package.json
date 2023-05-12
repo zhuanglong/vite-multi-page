@@ -8,10 +8,10 @@
     "build:staging": "esno ./scripts/build.ts run build --mode=staging",
     "report": "npm run build:staging -- --report=true",
     "lint": "npm run lint:js && npm run lint:style",
-    "lint:js": "eslint \"src/**/*.{vue,ts,tsx}\"",
-    "lint:js--fix": "eslint \"src/**/*.{vue,ts,tsx}\" --fix",
+    "lint:js": "eslint --ext .vue,.ts,.tsx .",
+    "lint:js--fix": "npm run lint:js -- --fix",
     "lint:style": "stylelint \"src/**/*.{vue,css,less,scss,postcss}\"",
-    "lint:style--fix": "stylelint \"src/**/*.{vue,css,less,scss,postcss}\" --fix",
+    "lint:style--fix": "npm run lint:style -- --fix",
     "type:check": "vue-tsc --noEmit --skipLibCheck",
     "precommit": "lint-staged",
     "prepare": "husky install"
@@ -30,6 +30,7 @@
     "@typescript-eslint/parser": "^5.0.0",
     "@vitejs/plugin-legacy": "^4.0.3",
     "@vitejs/plugin-vue": "^4.2.1",
+    "@vitejs/plugin-vue-jsx": "^3.0.1",
     "chalk": "^4.1.2",
     "commander": "^8.3.0",
     "eslint": "^8.0.0",
@@ -62,7 +63,7 @@
     "vue-tsc": "^0.3.0"
   },
   "engines": {
-    "node": "^12 || >=14"
+    "node": ">=16.15.1"
   },
   "lint-staged": {
     "*.{vue,ts,tsx}": "eslint",

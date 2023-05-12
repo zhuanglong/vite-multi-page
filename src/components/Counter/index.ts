@@ -1,1 +1,1 @@
-export { default } from './src/Counter.vue';
+export { default } from './Counter.vue';

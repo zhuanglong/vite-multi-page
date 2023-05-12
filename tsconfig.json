@@ -26,6 +26,11 @@
     "scripts/**/*.ts",
     "scripts/**/*.d.ts",
     "vite.config.ts",
+
+    "types/**/*.ts",
+    "types/**/*.d.ts",
+    "scripts/**/*.ts",
+    "scripts/**/*.d.ts",
   ],
   "exclude": ["node_modules", "dist", "**/*.js"]
 }

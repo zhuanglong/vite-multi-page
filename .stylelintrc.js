@@ -15,6 +15,9 @@ module.exports = {
   }],
   rules: {
     // https://github.com/ream88/stylelint-config-idiomatic-order
+    'no-invalid-position-at-import-rule': null,
+    'declaration-block-no-redundant-longhand-properties': null, // 不允许手写属性,可以组合成一个简写属性
+    'no-descending-specificity': null, // 禁止低优先级的选择器出现在高优先级的选择器之后
     'color-function-notation': null,
     'alpha-value-notation': null,
     'property-no-vendor-prefix': null, // 禁止前缀的属性

@@ -1,12 +1,10 @@
 {
   "recommendations": [
-    "johnsoncodehk.volar",
-    "johnsoncodehk.vscode-typescript-vue-plugin",
+    "Vue.volar",
     "dbaeumer.vscode-eslint",
     "stylelint.vscode-stylelint",
     "esbenp.prettier-vscode",
     "mikestead.dotenv",
-    "ionutvmi.path-autocomplete",
     "lihuiwang.vue-alias-skip"
   ]
 }
