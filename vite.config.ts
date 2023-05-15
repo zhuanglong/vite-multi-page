@@ -111,6 +111,9 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
     },
     build: {
       emptyOutDir: false,
+      // 防止 vite 将 rgba() 颜色转化为 #RGBA 十六进制符号的形式
+      // https://cn.vitejs.dev/config/#build-csstarget
+      cssTarget: 'chrome61',
       // https://rollupjs.org/guide/en/#outputoptions-object
       rollupOptions: {
         input: {
@@ -118,11 +121,12 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
         },
         output: {
           dir: `dist/${projectName}-${env.VITE_APP_ENV}`,
+          // js 和 css 文件夹分离
+          chunkFileNames: 'js/[name]-[hash].js',
+          entryFileNames: 'js/[name]-[hash].js',
+          assetFileNames: 'assets/[name]-[hash].[ext]',
         },
       },
-      // 防止 vite 将 rgba() 颜色转化为 #RGBA 十六进制符号的形式
-      // https://cn.vitejs.dev/config/#build-csstarget
-      cssTarget: 'chrome61',
     },
   };
 });
