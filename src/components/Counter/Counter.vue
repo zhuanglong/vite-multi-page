@@ -10,7 +10,8 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, reactive, computed, toRefs } from 'vue';
+  import { computed, defineComponent, reactive, toRefs } from 'vue';
+
   import { useCounter } from '@/store/modules/counter';
 
   export default defineComponent({

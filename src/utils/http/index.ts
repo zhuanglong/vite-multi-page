@@ -1,5 +1,6 @@
-import Http, { ContentTypeEnum } from './Http';
 import { getAppInfo, isDevMode } from '@/utils/appEnv';
+
+import Http, { ContentTypeEnum } from './Http';
 
 const { apiBaseURL: baseURL } = getAppInfo();
 

@@ -3,8 +3,8 @@ module.exports = {
   // 继承规则集
   extends: [
     'stylelint-config-standard',
-    'stylelint-config-prettier',
     'stylelint-config-idiomatic-order',
+    'stylelint-prettier/recommended',
   ],
   overrides: [{
     files: ['**/*.scss'],
@@ -15,6 +15,9 @@ module.exports = {
   }],
   rules: {
     // https://github.com/ream88/stylelint-config-idiomatic-order
+    'import-notation': null,
+    'comment-empty-line-before': null,
+    'function-no-unknown': null, // 禁用未知函数
     'no-invalid-position-at-import-rule': null,
     'declaration-block-no-redundant-longhand-properties': null, // 不允许手写属性,可以组合成一个简写属性
     'no-descending-specificity': null, // 禁止低优先级的选择器出现在高优先级的选择器之后

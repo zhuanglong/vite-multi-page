@@ -1,9 +1,9 @@
-import type { AxiosRequestConfig, AxiosInstance, AxiosResponse, AxiosError } from 'axios';
+import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import axios from 'axios';
 
-import type { CreateAxiosOptions, RequestOptions, ResultModel } from './typing';
-import * as requestCanceler from './requestCanceler';
 import { matchHttpStatusCode } from './handleStatus';
+import * as requestCanceler from './requestCanceler';
+import type { CreateAxiosOptions, RequestOptions, ResultModel } from './typing';
 
 export enum ContentTypeEnum {
   // json

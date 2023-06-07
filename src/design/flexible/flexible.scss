@@ -13,13 +13,14 @@
 
 // 设计稿宽度
 $designWidth: 375;
-// 设定 1rem = 100px
+// 设定 1rem = 100px（当然其他数也可以，1:100 为了方便换算）
 $blocks: 100;
 
 // 缩放所支持的设备最小宽度
 $minDeviceWidth: 320px;
 // 缩放所支持的设备最大宽度
 $maxDeviceWidth: 520px;
+// $maxDeviceWidth: 400px;
 
 // 启用最小宽度限制
 $enableMinLimit: true;
@@ -34,7 +35,7 @@ $enableMaxLimit: true;
     // 为便于换算，设定 1rem = 100px, 即 26.66667vw = 100px = 1rem = 26.66667%
     // 也就是 375px = (375px / 100px)rem
     font-size: calc(100vw / $designWidth * $blocks) !important;
-  
+
     // 最小宽度定义
     @if ($enableMinLimit) {
       @media screen and (max-width: $minDeviceWidth) {
@@ -43,21 +44,23 @@ $enableMaxLimit: true;
           font-size: 533.33333% !important;
         }
       }
-  
+
       body {
         min-width: $minDeviceWidth;
       }
     }
-  
+
     // 最大宽度定义
     @if ($enableMaxLimit) {
       @media screen and (min-width: $maxDeviceWidth) {
         & {
           /* stylelint-disable-next-line number-max-precision */
           font-size: 866.66667% !important;
+          // font-size: 666.66667% !important;
         }
       }
-  
+
+      // 居中处理
       body {
         max-width: $maxDeviceWidth;
         margin-right: auto;

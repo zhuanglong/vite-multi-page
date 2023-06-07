@@ -1,4 +1,5 @@
-import { defineStore, acceptHMRUpdate } from 'pinia';
+import { acceptHMRUpdate, defineStore } from 'pinia';
+
 import { store } from '@/store';
 
 interface CounterState {

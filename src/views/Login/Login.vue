@@ -5,6 +5,7 @@
 <script lang="ts" setup>
   import { onMounted } from 'vue';
   import { useRouter } from 'vue-router';
+
   import { usePermission } from '@/store/modules/permission';
 
   const router = useRouter();

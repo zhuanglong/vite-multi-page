@@ -1,10 +1,10 @@
-import type { Router } from 'vue-router';
 import NProgress from 'nprogress';
+import type { Router } from 'vue-router';
 import 'nprogress/nprogress.css';
 
-import * as requestCanceler from '@/utils/http/requestCanceler';
-import { getAppInfo } from '@/utils/appEnv';
 import { usePermission } from '@/store/modules/permission';
+import { getAppInfo } from '@/utils/appEnv';
+import * as requestCanceler from '@/utils/http/requestCanceler';
 
 const { title: pageBaseTitle } = getAppInfo();
 

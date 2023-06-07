@@ -1,5 +1,5 @@
-import { defHttp, testHttp } from '@/utils/http';
 import { getAppInfo } from '@/utils/appEnv';
+import { defHttp, testHttp } from '@/utils/http';
 
 const { apiPrefix } = getAppInfo();
 

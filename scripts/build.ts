@@ -1,6 +1,6 @@
+const chalk = require('chalk'); // 样式化描述文字
 const { program } = require('commander'); // 命令行
 const inquirer = require('inquirer'); // 终端交互工具
-const chalk = require('chalk'); // 样式化描述文字
 const shell = require('shelljs'); // shell 执行
 
 // 执行 shell 语句

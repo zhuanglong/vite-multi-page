@@ -2,10 +2,11 @@
 import './design/normalize.css';
 import './design/global.scss';
 
+// 移动端适应，手动转换 rem
 import './design/flexible/flexible.js';
 
-import type { RouteRecordRaw } from 'vue-router';
 import { createApp } from 'vue';
+import type { RouteRecordRaw } from 'vue-router';
 
 import { router, setupRouter } from './router';
 import { setupRouterGuard } from './router/guard';
