@@ -5,7 +5,7 @@ import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import postCssPxToRem from 'postcss-pxtorem';
 import del from 'rollup-plugin-delete'; // 删除文件和文件夹
-// import esbuild from 'rollup-plugin-esbuild';
+import esbuild from 'rollup-plugin-esbuild';
 import { visualizer } from 'rollup-plugin-visualizer'; // 打包模块可视化分析
 import { defineConfig, loadEnv, splitVendorChunkPlugin } from 'vite';
 import type { ConfigEnv, UserConfig } from 'vite';
@@ -57,17 +57,17 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
         }),
       // 解决 dev 模式无法在 Chrome 70 下使用 optional chaining 语法，https://github.com/vitejs/vite/issues/5222
       // 目前钉钉 webview 的内核是 Chrome/69.x.x，如需在钉钉上调试，请启用 esbuild
-      // {
-      //   ...esbuild({
-      //     target: 'chrome70',
-      //     include: /\.(vue|ts|tsx)$/,
-      //     loaders: {
-      //       '.vue': 'js',
-      //     },
-      //   }),
-      //   enforce: 'post',
-      // },
-      // legacy()
+      {
+        ...esbuild({
+          target: 'chrome70',
+          include: /\.(vue|ts|tsx)$/,
+          loaders: {
+            '.vue': 'js',
+          },
+        }),
+        enforce: 'post',
+      },
+      // legacy(),
     ],
     resolve: {
       alias: {
