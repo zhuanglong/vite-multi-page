@@ -21,13 +21,12 @@ $ yarn dev
 $ yarn build:staging or yarn build:prod
 
 # 手动输入一个或多个模块名打包
-
 yarn build:staging --projectName 'projectA,projectB'
 ```
 
-![](https://gitee.com/zloooong/image_store/raw/master/img/202202091116428.png)
+![](https://gitee.com/zloooong/image_store/raw/master/img/20230621104401.png)
 
-![](https://gitee.com/zloooong/image_store/raw/master/img/202202091118900.png)
+![](https://gitee.com/zloooong/image_store/raw/master/img/20230621104511.png)
 
 ## 提交规范
 

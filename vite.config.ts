@@ -33,6 +33,7 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
       vueJsx(),
       splitVendorChunkPlugin(),
       createHtmlPlugin({
+        minify: false,
         inject: {
           data: {
             projectPath,
