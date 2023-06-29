@@ -1,8 +1,10 @@
 import type { App } from 'vue';
-import type { RouteRecordRaw } from 'vue-router';
+import type { RouteRecordRaw, RouteMeta } from 'vue-router';
 import { createRouter, createWebHashHistory } from 'vue-router';
 
 import Login from '@/views/Login/Login.vue';
+
+import { usePermission } from '@/store/modules/permission';
 
 // /* chunkFileNames: "testHome" */ 或 /* webpackChunkName: "testAbout" */ 都不生效
 // 例如 About/index.vue 打包后是 index.xxxx.js，理想效果应该是 About.xxxx.js，所以只能改文件名 index.js => About.js
@@ -42,6 +44,14 @@ export const router = createRouter({
 export function setupRouter(app: App<Element>, mainRoutes: RouteRecordRaw) {
   router.addRoute(mainRoutes);
   app.use(router);
+}
+
+/**
+ * 是否有权限
+ */
+export function hasPermission(configRoles: RouteMeta['roles']) {
+  const { roles } = usePermission();
+  return roles.some((item) => (configRoles || []).includes(item));
 }
 
 export default router;

@@ -5,6 +5,7 @@ import 'nprogress/nprogress.css';
 import { usePermission } from '@/store/modules/permission';
 import { getAppInfo } from '@/utils/appEnv';
 import * as requestCanceler from '@/utils/http/requestCanceler';
+import { hasPermission } from './index';
 
 const { title: pageBaseTitle } = getAppInfo();
 
@@ -51,9 +52,9 @@ function createProgressGuard(router: Router) {
 
   router.afterEach((to) => {
     // 如果是登录页则一直加载
-    if (to.path === '/login') {
-      return true;
-    }
+    // if (to.path === '/login') {
+    //   return true;
+    // }
     NProgress.done();
     return true;
   });
@@ -70,21 +71,26 @@ function createPermissionGuard(router: Router) {
       setStartPath(to.redirectedFrom?.fullPath || '');
     }
 
-    // 忽略权限检查
+    // 忽略权限检查，不需要登录
     if (to.meta.ignoreAuth) {
       next();
       return true;
     }
 
-    // 需要检查权限
+    // 需要登录
     if (!isLoggedIn) {
       next('/login');
       return true;
     }
-    const hasPermission = roles.some((item: string) =>
-      ((to.meta.roles || []) as Array<string>).includes(item),
-    );
-    if (hasPermission) {
+
+    // roles 为空则不需要检查，但是要成功登录
+    if ((to.meta?.roles || []).length === 0) {
+      next();
+      return true;
+    }
+
+    // 需要检查 roles
+    if (hasPermission(to.meta?.roles)) {
       next();
       return true;
     } else {
