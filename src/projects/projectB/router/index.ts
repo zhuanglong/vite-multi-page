@@ -8,7 +8,7 @@ export const routes: RouteRecordRaw = {
   redirect: '/home',
   children: [
     {
-      path: 'home',
+      path: '/home',
       component: () => import('@/projects/projectB/views/Home/Home.vue'),
       meta: {
         title: 'Home',
@@ -16,7 +16,7 @@ export const routes: RouteRecordRaw = {
       },
     },
     {
-      path: 'about',
+      path: '/about',
       component: () => import('@/projects/projectB/views/About/About.vue'),
       meta: {
         title: 'About',

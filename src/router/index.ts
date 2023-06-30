@@ -38,7 +38,16 @@ const routes: Array<RouteRecordRaw> = [
 export const router = createRouter({
   history: createWebHashHistory(),
   routes,
-  scrollBehavior: () => ({ left: 0, top: 0 }),
+  strict: true,
+  scrollBehavior: (to, from, savedPosition) => {
+    // 根据路由配置表中的 "cacheScrollPosition" 保存滚动条位置
+    // 注意: 这个功能只在支持 history.pushState 的浏览器中可用
+    if (to.meta.cacheScrollPosition && savedPosition) {
+      return savedPosition;
+    } else {
+      return { top: 0 };
+    }
+  },
 });
 
 export function setupRouter(app: App<Element>, mainRoutes: RouteRecordRaw) {

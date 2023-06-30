@@ -8,18 +8,20 @@ export const routes: RouteRecordRaw = {
   redirect: '/home',
   children: [
     {
-      path: 'home',
+      path: '/home',
       component: () => import('@/projects/projectA/views/Home/Home.vue'),
       meta: {
         title: 'Home',
         roles: ['view'],
+        enableKeepAlive: true,
       },
     },
     {
-      path: 'about',
+      path: '/about',
       component: () => import('@/projects/projectA/views/About/About.vue'),
       meta: {
         title: 'About',
+        enableKeepAlive: true,
       },
     },
   ],
