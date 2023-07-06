@@ -17,9 +17,11 @@ $designWidth: 375;
 $blocks: 100;
 
 // 缩放所支持的设备最小宽度
-$minDeviceWidth: 320px;
+/* prettier-ignore */
+$minDeviceWidth: 320Px;
 // 缩放所支持的设备最大宽度
-$maxDeviceWidth: 520px;
+/* prettier-ignore */
+$maxDeviceWidth: 520Px;
 // $maxDeviceWidth: 400px;
 
 // 启用最小宽度限制

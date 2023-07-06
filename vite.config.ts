@@ -11,6 +11,7 @@ import { defineConfig, loadEnv, splitVendorChunkPlugin } from 'vite';
 import type { ConfigEnv, UserConfig } from 'vite';
 import compressPlugin from 'vite-plugin-compression'; // 使用 gzip 压缩资源
 import { createHtmlPlugin } from 'vite-plugin-html'; // 插入数据到 index.html
+import autoprefixer from 'autoprefixer';
 
 import { getAppInfo } from './scripts/appInfo';
 
@@ -28,6 +29,7 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
 
   return {
     base: './',
+
     plugins: [
       vue(),
       vueJsx(),
@@ -70,11 +72,7 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
       },
       // legacy(),
     ],
-    resolve: {
-      alias: {
-        '@': resolve(process.cwd(), 'src'),
-      },
-    },
+
     css: {
       // 引入预处理全局 CSS
       // https://cn.vitejs.dev/config/#css-preprocessoroptions
@@ -100,12 +98,21 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
             rootValue: 100, // 根据 flexible.scss 中的 1rem = 100px
             propList: ['*'],
           }),
+          autoprefixer(),
         ],
       },
     },
+
+    resolve: {
+      alias: {
+        '@': resolve(process.cwd(), 'src'),
+      },
+    },
+
     define: {
       __APP_INFO__: JSON.stringify(appInfo),
     },
+
     server: {
       host: '0.0.0.0', // 局域网访问
       proxy: {
@@ -116,12 +123,17 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
         },
       },
     },
+
     build: {
-      target: 'chrome70', // 解决钉钉 webview(Chrome/69.x.x) “SyntaxError: Unexpected token ?” 错误
-      emptyOutDir: false,
+      // 解决钉钉 webview(Chrome/69.x.x) “SyntaxError: Unexpected token ?” 错误
+      target: 'chrome70',
+
       // 防止 vite 将 rgba() 颜色转化为 #RGBA 十六进制符号的形式
       // https://cn.vitejs.dev/config/#build-csstarget
       cssTarget: 'chrome61',
+
+      emptyOutDir: false,
+
       // https://rollupjs.org/guide/en/#outputoptions-object
       rollupOptions: {
         input: {
